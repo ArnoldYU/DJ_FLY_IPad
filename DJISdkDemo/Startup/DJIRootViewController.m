@@ -126,8 +126,8 @@
     self.productFirmwarePackageVersion.hidden = YES;
     self.productModel.hidden = YES;
     //Disable the connect button by default
-//    [self.connectButton setEnabled:NO];
-    [self.connectButton setEnabled:YES];
+    [self.connectButton setEnabled:NO];
+//    [self.connectButton setEnabled:YES];
     [self.debugModeLabel setHidden:!ENTER_DEBUG_MODE];
 }
 
@@ -139,7 +139,7 @@
 
 -(IBAction) onConnectButtonClicked:(id)sender//open按钮
 {
-    if (!self.product) {//修改为非
+    if (self.product) {//修改为非
         ComponentSelectionViewController* inspireVC = [[ComponentSelectionViewController alloc] init];
         [self.navigationController pushViewController:inspireVC animated:YES];
     }

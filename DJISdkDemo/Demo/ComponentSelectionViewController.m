@@ -80,7 +80,7 @@
 //    if ([DemoComponentHelper fetchGimbal]) {
 //        [components addObject:[DemoSettingItem itemWithName:[DJIGimbalComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIGimbalComponent]]];
 //    }
-    if (![DemoComponentHelper fetchCamera]) {//添加了非
+    if ([DemoComponentHelper fetchCamera]) {//添加了非
         [components addObject:[DemoSettingItem itemWithName:[DJICameraComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJICameraComponent]]];
     }
 //    if ([DemoComponentHelper fetchAirLink]) {
