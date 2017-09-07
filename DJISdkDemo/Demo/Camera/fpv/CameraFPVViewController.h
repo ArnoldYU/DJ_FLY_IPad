@@ -25,6 +25,8 @@
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *fpvViewPortraitConstraints;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *rootViewPortraitConstraints;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *photoViewPotraitConstraints;
+@property (weak, nonatomic) IBOutlet UIButton *startRecordButton;
+@property (weak, nonatomic) IBOutlet UIButton *stopRecordButton;
 //
 //-(void)test;
 @property DJIFlightController *fc;

@@ -18,6 +18,8 @@
                 <outlet property="catchPhotoView2" destination="QmF-k0-rlT" id="7ol-ZY-xb2"/>
                 <outlet property="catchPhotoView3" destination="lJ0-AL-CGW" id="VfR-BU-ytt"/>
                 <outlet property="catchView" destination="X4C-Ao-X4A" id="iwe-Vv-m49"/>
+                <outlet property="controlbyhand" destination="DkE-Sm-rld" id="l9n-LI-cx5"/>
+                <outlet property="controlbyhandLabel" destination="cN1-V7-y7t" id="kcX-13-BrU"/>
                 <outlet property="deleteDataButtonView" destination="eS6-cw-Rhr" id="M99-fs-hR7"/>
                 <outlet property="deleteDataButtonView1" destination="ImA-ka-hac" id="8oG-Up-k9S"/>
                 <outlet property="deleteDataButtonView2" destination="87y-e9-bNI" id="qUG-ZP-wVb"/>
@@ -26,6 +28,8 @@
                 <outlet property="sendDataButtonView" destination="Kvm-sf-oNU" id="XFW-kY-SI3"/>
                 <outlet property="sendDataButtonView1" destination="DdL-iK-Uup" id="BJK-Hq-6wR"/>
                 <outlet property="sendDataButtonView2" destination="UHp-Yi-fqQ" id="AcC-ZI-SYC"/>
+                <outlet property="startRecordButton" destination="n8X-Me-tPA" id="Fgh-6a-Krk"/>
+                <outlet property="stopRecordButton" destination="xFO-R6-9Qt" id="D7n-sz-plO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="OEE-c1-3cS"/>
             </connections>
         </placeholder>
@@ -97,6 +101,36 @@
                                 <action selector="deleteDataButton2:" destination="-1" eventType="touchUpInside" id="SHB-R3-KJx"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8X-Me-tPA">
+                            <rect key="frame" x="-10" y="100" width="31" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="录制"/>
+                            <connections>
+                                <action selector="onStartRecordButtonClicked:" destination="-1" eventType="touchUpInside" id="kao-L0-aYc"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFO-R6-9Qt">
+                            <rect key="frame" x="0.0" y="62" width="31" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="停止"/>
+                            <connections>
+                                <action selector="onStopRecordButtonClicked:" destination="-1" eventType="touchUpInside" id="igv-qx-OmZ"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手动模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cN1-V7-y7t">
+                            <rect key="frame" x="22" y="13" width="70" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DkE-Sm-rld">
+                            <rect key="frame" x="100" y="8" width="51" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="changecontrol:" destination="-1" eventType="valueChanged" id="8Jb-81-w6c"/>
+                            </connections>
+                        </switch>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
@@ -117,21 +151,21 @@
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3kg-Im-CSK">
-                    <rect key="frame" x="544" y="137" width="262.5" height="147.5"/>
+                    <rect key="frame" x="544" y="137" width="263" height="148"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="262.39999999999998" id="XBQ-So-0OV"/>
                         <constraint firstAttribute="height" constant="147.59999999999999" id="uGN-bH-EGg"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rai-gO-ccn" userLabel="Photo2 View">
-                    <rect key="frame" x="282.5" y="137.5" width="262.5" height="147.5"/>
+                    <rect key="frame" x="283" y="138" width="262" height="147"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="147.59999999999999" id="aHQ-hg-dTC"/>
                         <constraint firstAttribute="width" constant="262.39999999999998" id="gBd-jA-xgh"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xwq-D1-Pek">
-                    <rect key="frame" x="20" y="137.5" width="262.5" height="147.5"/>
+                    <rect key="frame" x="20" y="138" width="263" height="147"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="147.59999999999999" id="QTi-ht-dzo"/>
                         <constraint firstAttribute="width" constant="262.39999999999998" id="jL6-SY-cf0"/>
@@ -147,7 +181,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCX-d3-Xgg">
-                    <rect key="frame" x="826" y="71.5" width="178" height="213.5"/>
+                    <rect key="frame" x="827" y="72" width="177" height="213"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="队长：妥明翔" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HD-PX-780">
                             <rect key="frame" x="20" y="48" width="104" height="21"/>
@@ -168,7 +202,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无人机小分队" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c38-fk-ESA">
-                            <rect key="frame" x="20" y="8" width="122.5" height="24"/>
+                            <rect key="frame" x="20" y="8" width="123" height="24"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -195,7 +229,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目标1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1B-m6-5Np">
-                    <rect key="frame" x="121" y="71.5" width="60" height="29"/>
+                    <rect key="frame" x="121" y="72" width="60" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

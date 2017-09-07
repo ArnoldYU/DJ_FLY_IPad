@@ -13,6 +13,8 @@
 #import <VideoPreviewer/VideoPreviewer.h>
 #import <DJISDK/DJISDK.h>
 #import <DJISDK/DJIFlightController.h>
+#import <ReplayKit/ReplayKit.h>
+
 
 #define catchViewWidth 262.4
 #define catchViewHeight 147.6
@@ -20,6 +22,14 @@
 
 @interface CameraFPVViewController () <DJICameraDelegate>
 
+@property (weak, nonatomic) IBOutlet UISwitch *controlbyhand;
+@property (weak, nonatomic) IBOutlet UILabel *controlbyhandLabel;
+
+
+@property int controlmode;
+@property (nonatomic) BOOL isInRecordVideoMode;
+@property (nonatomic) BOOL isRecordingVideo;
+@property (nonatomic) NSUInteger recordingTime;
 
 
 @property(nonatomic, weak) IBOutlet UIView* fpvView;//视频显示位置
@@ -38,6 +48,7 @@
 - (IBAction)deleteDataButton1:(id)sender;
 - (IBAction)sendDataButton2:(id)sender;
 - (IBAction)deleteDataButton2:(id)sender;
+- (IBAction)changecontrol:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *sendDataButtonView2;
@@ -79,9 +90,17 @@
     // Do any additional setup after loading the view from its nib.
     _touchFlag = TRUE;
     selectPhoto = TRUE;
+    _controlmode = 1;
+    
+    //初始化删除按钮不可按
     self.deleteDataButtonView.enabled=FALSE;
     self.deleteDataButtonView1.enabled=FALSE;
     self.deleteDataButtonView2.enabled=FALSE;
+    
+    //初始化发送按钮不可按
+    self.sendDataButtonView.enabled=FALSE;
+    self.sendDataButtonView1.enabled=FALSE;
+    self.sendDataButtonView2.enabled=FALSE;
     
     DJICamera* camera = [DemoComponentHelper fetchCamera];
     if (camera) {
@@ -120,6 +139,10 @@
     
     [[VideoPreviewer instance] setView:self.fpvView];
     
+    //初始化手动模式
+    _controlbyhand.selected = false;
+    _controlbyhandLabel.text = @"手动模式";
+    
     _catchView.layer.borderWidth = 1;
     _catchPhotoView1.layer.borderWidth = 1;
     _catchPhotoView2.layer.borderWidth = 1;
@@ -144,6 +167,23 @@
     
     
     //    [sendData sendDataToOnboardSDKDevice:testData withCompletion:nil];
+    [self setVideoPreview];
+    
+    // set delegate to render camera's video feed into the view
+    __weak DJICamera* camera = [DemoComponentHelper fetchCamera];
+    if (camera) {
+        [camera setDelegate:self];
+    }
+    
+    self.isInRecordVideoMode = NO;
+    self.isRecordingVideo = NO;
+    // disable the shoot photo button by default
+    [self.startRecordButton setEnabled:NO];
+    [self.stopRecordButton setEnabled:NO];
+    
+    // start to check the pre-condition
+    [self getCameraMode];
+
 }
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -319,56 +359,6 @@
     UIGraphicsEndImageContext();
     return image;
 }
-//- (IBAction)confirmButton:(UIButton *)sender {
-//    _touchFlag = FALSE;
-//    UIInterfaceOrientation currOrientation = [[UIApplication sharedApplication]statusBarOrientation];
-//    NSLog(@"lalalala");
-//    float real_x1;float real_y1;
-//    float real_x2;float real_y2;
-//    float end_width;float end_height;
-//    float persent_x1;float persent_x2;
-//    float persent_y1;float persent_y2;
-//    DJIFlightController *sendData;
-//    NSString *locationData;
-//    //(real_x1,real_y1)为左上角的点
-//    //(real_x2,real_y2)为右下角的点
-//    if (_x_begin>_x_end) {
-//        real_x1 = _x_end;
-//        real_x2 = _x_begin;
-//    } else {
-//        real_x1 = _x_begin;
-//        real_x2 = _x_end;
-//    }
-//    if (_y_begin>_y_end) {
-//        real_y2 = _y_begin;
-//        real_y1 = _y_end;
-//    } else {
-//        real_y2 = _y_end;
-//        real_y1 = _y_begin;
-//    }
-//    //    NSLog(@"fpvView frame: %@", NSStringFromCGRect(_fpvView.frame));//打印UIView在屏幕上的位置
-//    //    NSLog(@"begin:\tx:%lf\ty:%lf",real_x1,real_y1);
-//    //    NSLog(@"end:\tx:%lf\ty:%lf",real_x2,real_y2);
-//    //
-//    //    NSLog(@"进入横屏");
-//    persent_y1 = (real_y1 - 305)/442.8;
-//    persent_y2 = (real_y2 - 305)/442.8;
-//    persent_x1 = (real_x1 - 20)/787.8;
-//    persent_x2 = (real_x2 - 20)/787.8;
-//    [self shotPhotoWithSelect:1];
-//    
-//    //    locationData = [[NSString alloc] initWithString:[NSString stringWithFormat:@"1:%lf,%lf,%lf,%lf,",persent_x1,persent_y1,persent_x2,persent_y2]];
-//    //    NSLog(@"%@",locationData);
-//    //    NSData *testData = [locationData dataUsingEncoding: NSUTF8StringEncoding];
-//    //    Byte *testByte = (Byte *)[testData bytes];
-//    //
-//    //    DJIFlightController* fc = [DemoComponentHelper fetchFlightController];
-//    
-//    //    [sendData sendDataToOnboardSDKDevice:testData withCompletion:nil];
-//    if(_touchFlag==FALSE){
-//        [self sendDateWithX1:persent_x1 Y1:persent_y1 X2:persent_x2 Y2:persent_y2];
-//    }
-//}
 
 //截取图片
 //允许截屏的范围为x:20~807.2
@@ -420,7 +410,7 @@
 
 //发送函数--实现目标的跟踪与删除
 //
-- (void)sendDataWithX1:(float) persent_x1
+- (void)sendDataWithX1:(float)persent_x1
                     Y1:(float)persent_y1
                     X2:(float)persent_x2
                     Y2:(float)persent_y2
@@ -449,11 +439,29 @@
         }
     }];
 }
+//发送函数--实现手动与自动的切换
+- (void)sendDatawithNum
+{
+    DJIFlightController *sendData;
+    NSString *locationData;
+    
+    locationData = @"2";
+    NSData *testData = [locationData dataUsingEncoding: NSUTF8StringEncoding];
+    Byte *testByte = (Byte *)[testData bytes];
+    DJIFlightController* fc = [DemoComponentHelper fetchFlightController];
+    [fc sendDataToOnboardSDKDevice:testData withCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            ShowResult(@"sendData Error:%@", error.localizedDescription);
+        }
+        else
+        {
+            ShowResult(@"sendData Succeeded.");
+        }
+    }];
+
+}
 
 
-//- (IBAction)cancelButton:(UIButton *)sender {
-//    _touchFlag = TRUE;
-//}
 //按钮发送1
 - (IBAction)sendDataButton:(id)sender {
     NSLog(@"lalalala");
@@ -614,6 +622,36 @@
     self.sendDataButtonView2.enabled=TRUE;
     self.deleteDataButtonView2.enabled=FALSE;
 }
+//发送按钮切换手动自动
+- (IBAction)changecontrol:(id)sender {
+    [self sendDatawithNum];
+    if (_controlmode == 1){
+        //自动模式下发送按钮可以使用
+        self.sendDataButtonView.enabled = TRUE;
+        self.sendDataButtonView1.enabled = TRUE;
+        self.sendDataButtonView2.enabled = TRUE;
+        _controlbyhandLabel.text = @"自动模式";
+        _controlbyhand.selected = TRUE;
+        _controlmode = 0;
+    }
+    else {
+        //手动模式下全部按钮不可用 且目标图片清除
+        self.deleteDataButtonView.enabled=FALSE;
+        self.deleteDataButtonView1.enabled=FALSE;
+        self.deleteDataButtonView2.enabled=FALSE;
+        self.sendDataButtonView.enabled=FALSE;
+        self.sendDataButtonView1.enabled=FALSE;
+        self.sendDataButtonView2.enabled=FALSE;
+        //删除图片
+        [self deletePhotoWithSelect:1];
+        [self deletePhotoWithSelect:2];
+        [self deletePhotoWithSelect:3];
+        _controlbyhandLabel.text = @"手动模式";
+        _controlbyhand.selected = FALSE;
+        _controlmode = 1;
+    }
+    
+}
 
 /*********************************************************************************/
 #pragma mark - DJIFlightControllerDelegate
@@ -661,21 +699,143 @@
     self.catchView.frame=CGRectMake(100, 100, 200, 200);
     
     [self updateThermalCameraUI];
-    
-    //        [sendData sendDataToOnboardSDKDevice:testData withCompletion:nil];
-    
-    //    [fc sendDataToOnboardSDKDevice:data withCompletion:^(NSError * _Nullable error) {
-    //        if (error) {
-    //            ShowResult(@"sendData Error:%@", error.localizedDescription);
-    //
-    //        }
-    //        else
-    //        {
-    //            ShowResult(@"sendData Succeeded.");
-    //        }
-    //    }];
-    
 }
+
+
+#pragma mark - Actions
+/**
+ *  When the pre-condition meets, the start record button should be enabled. Then the user can can record
+ *  a video now.
+ */
+- (IBAction)onStartRecordButtonClicked:(id)sender {
+    __weak DJICamera* camera = [DemoComponentHelper fetchCamera];
+    if (camera) {
+        [self.startRecordButton setEnabled:NO];
+        [camera startRecordVideoWithCompletion:^(NSError * _Nullable error) {
+            if (error) {
+                ShowResult(@"ERROR: startRecordVideoWithCompletion:. %@", error.description);
+            }
+        }];
+    }
+}
+
+/**
+ *  When the camera is recording, the stop record button should be enabled. Then the user can stop recording
+ *  the video.
+ */
+- (IBAction)onStopRecordButtonClicked:(id)sender {
+    __weak DJICamera* camera = [DemoComponentHelper fetchCamera];
+    if (camera) {
+        [self.stopRecordButton setEnabled:NO];
+        [camera stopRecordVideoWithCompletion:^(NSError * _Nullable error) {
+            if (error) {
+                ShowResult(@"ERROR: stopRecordVideoWithCompletion:. %@", error.description);
+            }
+        }];
+    }
+}
+#pragma mark - Precondition
+/**
+ *  Check if the camera's mode is DJICameraModeRecordVideo.
+ *  If the mode is not DJICameraModeRecordVideo, we need to set it to be DJICameraModeRecordVideo.
+ *  If the mode is already DJICameraModeRecordVideo, we check the exposure mode.
+ */
+-(void) getCameraMode {
+    __weak DJICamera* camera = [DemoComponentHelper fetchCamera];
+    if (camera) {
+        WeakRef(target);
+        [camera getModeWithCompletion:^(DJICameraMode mode, NSError * _Nullable error) {
+            WeakReturn(target);
+            if (error) {
+                ShowResult(@"ERROR: getModeWithCompletion:. %@", error.description);
+            }
+            else if (mode == DJICameraModeRecordVideo) {
+                target.isInRecordVideoMode = YES;
+            }
+            else {
+                [target setCameraMode];
+            }
+        }];
+    }
+}
+
+/**
+ *  Set the camera's mode to DJICameraModeRecordVideo.
+ *  If it succeeds, we can enable the take photo button.
+ */
+-(void) setCameraMode {
+    __weak DJICamera* camera = [DemoComponentHelper fetchCamera];
+    if (camera) {
+        WeakRef(target);
+        [camera setMode:DJICameraModeRecordVideo withCompletion:^(NSError * _Nullable error) {
+            WeakReturn(target);
+            if (error) {
+                ShowResult(@"ERROR: setMode:withCompletion:. %@", error.description);
+            }
+            else {
+                // Normally, once an operation is finished, the camera still needs some time to finish up
+                // all the work. It is safe to delay the next operation after an operation is finished.
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    WeakReturn(target);
+                    target.isInRecordVideoMode = YES;
+                });
+            }
+        }];
+    }
+}
+#pragma mark - UI related
+- (void)setVideoPreview {
+    [[VideoPreviewer instance] start];
+    [[VideoPreviewer instance] setView:self.fpvView];
+    self.previewerAdapter = [VideoPreviewerSDKAdapter adapterWithDefaultSettings];
+    [self.previewerAdapter start];
+}
+
+- (void)cleanVideoPreview {
+    [[VideoPreviewer instance] unSetView];
+    if (self.previewerAdapter) {
+        [self.previewerAdapter stop];
+        self.previewerAdapter = nil;
+    }
+}
+
+-(void) setIsInRecordVideoMode:(BOOL)isInRecordVideoMode {
+    _isInRecordVideoMode = isInRecordVideoMode;
+    [self toggleRecordUI];
+}
+
+-(void) setIsRecordingVideo:(BOOL)isRecordingVideo {
+    _isRecordingVideo = isRecordingVideo;
+    [self toggleRecordUI];
+}
+
+-(void) toggleRecordUI {
+    [self.startRecordButton setEnabled:(self.isInRecordVideoMode && !self.isRecordingVideo)];
+    [self.stopRecordButton setEnabled:(self.isInRecordVideoMode && self.isRecordingVideo)];
+    if (!self.isRecordingVideo) {
+//        self.recordingTimeLabel.text = @"00:00";
+    }
+    else {
+        int hour = (int)self.recordingTime / 3600;
+        int minute = (self.recordingTime % 3600) / 60;
+        int second = (self.recordingTime % 3600) % 60;
+//        self.recordingTimeLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d",hour, minute, second];
+    }
+}
+
+#pragma mark - DJICameraDelegate
+-(void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)length
+{
+    [[VideoPreviewer instance] push:videoBuffer length:(int)length];
+}
+
+//-(void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState {
+//    self.isRecordingVideo = systemState.isRecording;
+//    
+//    self.recordingTime = systemState.currentVideoRecordingTimeInSeconds;
+//}
+
+
 
 @end
 

@@ -20,6 +20,9 @@
 
 @interface CameraRecordVideoViewController () <DJICameraDelegate>
 
+
+
+
 @property (nonatomic) BOOL isInRecordVideoMode;
 @property (nonatomic) BOOL isRecordingVideo;
 @property (nonatomic) NSUInteger recordingTime;

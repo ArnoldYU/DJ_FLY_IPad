@@ -74,27 +74,27 @@
 -(void) initializeComponentSection {
     NSMutableArray* components = [[NSMutableArray alloc] init];
     
-//    if ([DemoComponentHelper fetchBattery]) {
-//        [components addObject:[DemoSettingItem itemWithName:[DJIBatteryComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIBatteryComponent]]];
-//    }
-//    if ([DemoComponentHelper fetchGimbal]) {
-//        [components addObject:[DemoSettingItem itemWithName:[DJIGimbalComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIGimbalComponent]]];
-//    }
+    if ([DemoComponentHelper fetchBattery]) {
+        [components addObject:[DemoSettingItem itemWithName:[DJIBatteryComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIBatteryComponent]]];
+    }
+    if ([DemoComponentHelper fetchGimbal]) {
+        [components addObject:[DemoSettingItem itemWithName:[DJIGimbalComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIGimbalComponent]]];
+    }
     if ([DemoComponentHelper fetchCamera]) {//添加了非
         [components addObject:[DemoSettingItem itemWithName:[DJICameraComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJICameraComponent]]];
     }
-//    if ([DemoComponentHelper fetchAirLink]) {
-//        [components addObject:[DemoSettingItem itemWithName:[DJIAirLinkComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIAirLinkComponent]]];
-//    }
-//    if ([DemoComponentHelper fetchFlightController]) {
-//        [components addObject:[DemoSettingItem itemWithName:[DJIFlightControllerComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIFlightControllerComponent]]];
-//    }
-//    if ([DemoComponentHelper fetchRemoteController]) {
-//        [components addObject:[DemoSettingItem itemWithName:[DJIRemoteControllerComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIRemoteControllerComponent]]];
-//    }
-//    if ([DemoComponentHelper fetchHandheldController]) {
-//        [components addObject:[DemoSettingItem itemWithName:[DJIHandheldControllerComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIHandheldControllerComponent]]];
-//    }
+    if ([DemoComponentHelper fetchAirLink]) {
+        [components addObject:[DemoSettingItem itemWithName:[DJIAirLinkComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIAirLinkComponent]]];
+    }
+    if ([DemoComponentHelper fetchFlightController]) {
+        [components addObject:[DemoSettingItem itemWithName:[DJIFlightControllerComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIFlightControllerComponent]]];
+    }
+    if ([DemoComponentHelper fetchRemoteController]) {
+        [components addObject:[DemoSettingItem itemWithName:[DJIRemoteControllerComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIRemoteControllerComponent]]];
+    }
+    if ([DemoComponentHelper fetchHandheldController]) {
+        [components addObject:[DemoSettingItem itemWithName:[DJIHandheldControllerComponent capitalizedString] andClass:[[self componentVCDict] objectForKey:DJIHandheldControllerComponent]]];
+    }
 
     [self.items addObject:components];
 }

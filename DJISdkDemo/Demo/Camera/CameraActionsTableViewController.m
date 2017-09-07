@@ -29,38 +29,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.sectionNames = [NSMutableArray arrayWithArray:@[@"General", @"FPV", @"Shoot Photo", @"Record Video", @"Playback", @"Media Download"]];
-    self.sectionNames = [NSMutableArray arrayWithArray:@[@"FPV"]];
+    self.sectionNames = [NSMutableArray arrayWithArray:@[@"General", @"FPV", @"Shoot Photo", @"Record Video", @"Playback", @"Media Download"]];
+//    self.sectionNames = [NSMutableArray arrayWithArray:@[@"FPV"]];
     
-//    // General
-//    [self.items addObject:@[[DemoSettingItem itemWithName:@"Push Info" andClass:[CameraPushInfoViewController class]],
-//                            [DemoSettingItem itemWithName:@"Set/Get ISO" andClass:[CameraISOViewController class]]]];
-    // FPV
-//    [self.items addObject:@[[DemoSettingItem itemWithName:@"First Person View (FPV)" andClass:[CameraFPVViewController class]]]];
-     [self.items addObject:@[[DemoSettingItem itemWithName:@"目标跟踪" andClass:[CameraFPVViewController class]]]];
+    // General
+    [self.items addObject:@[[DemoSettingItem itemWithName:@"Push Info" andClass:[CameraPushInfoViewController class]],
+                            [DemoSettingItem itemWithName:@"Set/Get ISO" andClass:[CameraISOViewController class]]]];
+//     FPV
+    [self.items addObject:@[[DemoSettingItem itemWithName:@"First Person View (FPV)" andClass:[CameraFPVViewController class]],
+                            [DemoSettingItem itemWithName:@"目标跟踪" andClass:[CameraFPVViewController class]]]];
+//    [self.items addObject:@[[DemoSettingItem itemWithName:@"目标跟踪" andClass:[CameraFPVViewController class]]]];
     
     // Shoot Photo
-//    [self.items addObject:@[[DemoSettingItem itemWithName:@"Shoot Single Photo" andClass:[CameraShootSinglePhotoViewController class]]]];
-//    
-//    // Record Video
-//    [self.items addObject:@[[DemoSettingItem itemWithName:@"Record video" andClass:[CameraRecordVideoViewController class]]]];
-//    
-//    // Playback
-//    [self.items addObject:@[[DemoSettingItem itemWithName:@"Playback Push Info" andClass:[CameraPlaybackPushInfoViewController class]],
-//                            [DemoSettingItem itemWithName:@"Playback commands" andClass:[CameraPlaybackCommandViewController class]],
-//                            [DemoSettingItem itemWithName:@"Playback Download" andClass:[CameraPlaybackDownloadViewController class]]]];
+    [self.items addObject:@[[DemoSettingItem itemWithName:@"Shoot Single Photo" andClass:[CameraShootSinglePhotoViewController class]]]];
+//
+    // Record Video
+    [self.items addObject:@[[DemoSettingItem itemWithName:@"Record video" andClass:[CameraRecordVideoViewController class]]]];
+//
+    // Playback
+    [self.items addObject:@[[DemoSettingItem itemWithName:@"Playback Push Info" andClass:[CameraPlaybackPushInfoViewController class]],
+                            [DemoSettingItem itemWithName:@"Playback commands" andClass:[CameraPlaybackCommandViewController class]],
+                            [DemoSettingItem itemWithName:@"Playback Download" andClass:[CameraPlaybackDownloadViewController class]]]];
 
     // Media Download
-//    NSMutableArray *medias = [NSMutableArray arrayWithObject:[DemoSettingItem itemWithName:@"Fetch media" andClass:[CameraFetchMediaViewController class]]];
-////    DJIBaseProduct *product = [DemoComponentHelper fetchProduct];
-//    if ([product.model isEqualToString:DJIAircraftModelNamePhantom4Pro] ||
-//        [product.model isEqualToString:DJIAircraftModelNameInspire2]) {
-//        [medias addObject:[DemoSettingItem itemWithName:@"Media playback" andClass:[In2P4PCameraPlayBackViewController class]]];
-//    }
-//    else {
-//        [medias addObject:[DemoSettingItem itemWithName:@"Media playback" andClass:[CameraMediaPlaybackViewController class]]];
-//    }
-//    [self.items addObject:medias];
+    NSMutableArray *medias = [NSMutableArray arrayWithObject:[DemoSettingItem itemWithName:@"Fetch media" andClass:[CameraFetchMediaViewController class]]];
+    DJIBaseProduct *product = [DemoComponentHelper fetchProduct];
+    if ([product.model isEqualToString:DJIAircraftModelNamePhantom4Pro] ||
+        [product.model isEqualToString:DJIAircraftModelNameInspire2]) {
+        [medias addObject:[DemoSettingItem itemWithName:@"Media playback" andClass:[In2P4PCameraPlayBackViewController class]]];
+    }
+    else {
+        [medias addObject:[DemoSettingItem itemWithName:@"Media playback" andClass:[CameraMediaPlaybackViewController class]]];
+    }
+    [self.items addObject:medias];
     
 }
 

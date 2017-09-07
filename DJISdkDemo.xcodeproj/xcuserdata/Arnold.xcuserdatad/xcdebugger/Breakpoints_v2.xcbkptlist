@@ -58,11 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781">
+            startingLineNumber = "818"
+            endingLineNumber = "818"
+            landmarkName = "-toggleRecordUI"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,11 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "778"
-            endingLineNumber = "778">
+            startingLineNumber = "815"
+            endingLineNumber = "815"
+            landmarkName = "-toggleRecordUI"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -86,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "874"
-            endingLineNumber = "874">
+            startingLineNumber = "911"
+            endingLineNumber = "911">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "981"
-            endingLineNumber = "981">
+            startingLineNumber = "1018"
+            endingLineNumber = "1018">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -114,11 +118,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "759"
-            endingLineNumber = "759">
+            startingLineNumber = "796"
+            endingLineNumber = "796"
+            landmarkName = "-cleanVideoPreview"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,11 +134,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "754"
-            endingLineNumber = "754">
+            startingLineNumber = "791"
+            endingLineNumber = "791"
+            landmarkName = "-cleanVideoPreview"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -142,27 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.h"
-            timestampString = "522643706.709864"
+            timestampString = "526373374.000028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
-            landmarkName = "@implementation CameraFPVViewController"
-            landmarkType = "3">
+            startingLineNumber = "67"
+            endingLineNumber = "67">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -188,13 +180,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444074.466584"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "@interface CameraFPVViewController()"
-            landmarkType = "2">
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "controlmode"
+            landmarkType = "24">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -236,27 +228,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444074.466584"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "fpvView"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "684"
-            endingLineNumber = "684">
+            startingLineNumber = "721"
+            endingLineNumber = "721"
+            landmarkName = "@implementation CameraFPVViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -280,12 +258,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
-            timestampString = "523444649.007717"
+            timestampString = "526478930.586129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "504"
-            endingLineNumber = "504"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "-sendDataButton:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DJISdkDemo/Demo/Camera/fpv/CameraFPVViewController.m"
+            timestampString = "526478930.586129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
